@@ -4,25 +4,57 @@ using UnityEngine;
 
 public class PlayerFPS : MonoBehaviour
 {
-
+    private Gravity gravity;
+    [SerializeField] private Vector3 velocity;
     private CharacterController characterController;
-    private Vector3 velocity;
 
-    public float speed;
+    private float speed;
+    public float baseSpeed;
+    public float RunSpeed;
+
+
+    public float jumpForce = 4.4f;
 
     void Start()
     {
+        speed = baseSpeed;
+        gravity = GetComponent<Gravity>();
         characterController = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = (transform.right * x + transform.forward * z) * speed * Time.deltaTime;
+        if (gravity.isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
 
-        characterController.Move(move);
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            speed = RunSpeed;
+        }
+
+        if (Input.GetButtonUp("Fire3"))
+        {
+            speed = baseSpeed;
+        }
+
+
+        Vector3 move = (transform.right * x + transform.forward * z);
+
+        characterController.Move(move * speed * Time.deltaTime);
+
+        if (Input.GetButtonDown("Jump") && gravity.IsGrounded())
+        {
+            velocity.y = jumpForce;
+        }
+
+        velocity.y += gravity.gravity * gravity.gravityScale * Time.deltaTime;
+
+        characterController.Move(velocity * Time.deltaTime);
     }
 }
