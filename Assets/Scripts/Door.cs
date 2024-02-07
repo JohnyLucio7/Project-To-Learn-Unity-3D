@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    Interaction interaction;
+    public string text = "Call door interaction function!";
+
+    private void Awake()
+    {
+        interaction = FindObjectOfType<Interaction>();
+    }
     private void Interaction()
     {
-        Debug.Log("Call door interaction function!");
+        interaction.SetTextInteraction(text);
     }
 }
