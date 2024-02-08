@@ -7,6 +7,7 @@ public class Collectable : MonoBehaviour
 {
     Interaction interaction;
     public string text = "Call collectable interaction function!";
+    public InteractableItem objeto;
 
     private void Awake()
     {
@@ -16,5 +17,10 @@ public class Collectable : MonoBehaviour
     private void Interaction()
     {
         interaction.SetTextInteraction(text);
+    }
+
+    private void StartInteraction()
+    {
+        interaction.StartInteraction(objeto);
     }
 }

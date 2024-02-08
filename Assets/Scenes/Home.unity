@@ -16220,6 +16220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cac4dc7483fd31459b0509c60115971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: Call collectable interaction function!
+  objeto: {fileID: 11400000, guid: b7c55abd0521bd94dacfcb6032f95fc4, type: 2}
 --- !u!65 &1207049284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26559,6 +26561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c1c9db2427699458b34f8e54282170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: Call door interaction function!
+  objeto: {fileID: 11400000, guid: 701f48adc91034f4bb9d8f38250523b3, type: 2}
 --- !u!4 &2105484366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1034405265806807301, guid: c47f1a83b147ec342a2b5976fcfcdb01, type: 3}
