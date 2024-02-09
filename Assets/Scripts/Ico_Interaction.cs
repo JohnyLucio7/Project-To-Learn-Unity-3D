@@ -12,6 +12,7 @@ public class Ico_Interaction : MonoBehaviour
 
     private bool isBehind;
     public bool isShowDistance;
+    public bool isShowBehind;
 
     private void Awake()
     {
@@ -55,6 +56,8 @@ public class Ico_Interaction : MonoBehaviour
 
         isBehind = Vector3.Dot(toOther, forward) < 0;
 
+        Vector2 icoPos = Camera.main.WorldToScreenPoint(transform.position);
+
         float distance = Vector3.Distance(transform.position, gameController.PlayerBody.position);
 
         if (isShowDistance)
@@ -71,10 +74,43 @@ public class Ico_Interaction : MonoBehaviour
 
         txtDistance.text = distance.ToString("N0") + "m";
 
-        if (isBehind == false)
+        if (isShowBehind)
         {
-            Vector2 icoPos = Camera.main.WorldToScreenPoint(transform.position);
-            ico.transform.position = icoPos;
+            float minX = ico.GetPixelAdjustedRect().width / 2;
+            float maxX = Screen.width - minX;
+            float minY = ico.GetPixelAdjustedRect().height / 2;
+            float maxY = Screen.height - minY;
+
+            icoPos.x = Mathf.Clamp(icoPos.x, minX, maxX);
+            icoPos.y = Mathf.Clamp(icoPos.y, minY, maxY);
+
+            if (isBehind)
+            {
+                if (icoPos.x < Screen.width / 2)
+                {
+                    icoPos.x = maxX;
+                }
+                else
+                {
+                    icoPos.x = minX;
+                }
+            }
+
         }
+        else
+        {
+            if (isBehind)
+            {
+                ico.enabled = false;
+                txtDistance.enabled = false;
+            }
+            else
+            {
+                ico.enabled = true;
+                txtDistance.enabled = true;
+            }
+        }
+
+        ico.transform.position = icoPos;
     }
 }

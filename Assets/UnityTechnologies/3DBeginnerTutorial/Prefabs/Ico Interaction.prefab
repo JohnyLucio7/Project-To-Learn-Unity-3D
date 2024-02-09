@@ -150,6 +150,7 @@ MonoBehaviour:
   txtDistance: {fileID: 3912081683375836284}
   canvas: {fileID: 2397303700228832774}
   isShowDistance: 0
+  isShowBehind: 0
 --- !u!1 &2397303701983429959
 GameObject:
   m_ObjectHideFlags: 0
